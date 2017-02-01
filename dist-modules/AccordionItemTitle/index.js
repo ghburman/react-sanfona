@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -30,7 +30,7 @@ var AccordionItemTitle = function (_Component) {
   function AccordionItemTitle() {
     _classCallCheck(this, AccordionItemTitle);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AccordionItemTitle).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AccordionItemTitle.__proto__ || Object.getPrototypeOf(AccordionItemTitle)).apply(this, arguments));
   }
 
   _createClass(AccordionItemTitle, [{
@@ -54,7 +54,7 @@ var AccordionItemTitle = function (_Component) {
       }
 
       return _react2.default.createElement(
-        'h3',
+        this.props.rootTag,
         { 'aria-controls': 'react-sanfona-item-body-' + this.props.uuid,
           className: (0, _classnames2.default)('react-sanfona-item-title', this.props.className),
           id: 'react-safona-item-title-' + this.props.uuid,
@@ -71,9 +71,14 @@ var AccordionItemTitle = function (_Component) {
 exports.default = AccordionItemTitle;
 
 
+AccordionItemTitle.defaultProps = {
+  rootTag: 'h3'
+};
+
 AccordionItemTitle.propTypes = {
   className: _react.PropTypes.string,
   onClick: _react.PropTypes.func,
   title: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.node]),
-  uuid: _react.PropTypes.string
+  uuid: _react.PropTypes.string,
+  rootTag: _react.PropTypes.string
 };

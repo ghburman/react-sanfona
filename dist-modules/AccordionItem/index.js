@@ -48,7 +48,7 @@ var AccordionItem = function (_Component) {
   function AccordionItem(props) {
     _classCallCheck(this, AccordionItem);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AccordionItem).call(this, props));
+    var _this = _possibleConstructorReturn(this, (AccordionItem.__proto__ || Object.getPrototypeOf(AccordionItem)).call(this, props));
 
     _this.state = {
       maxHeight: props.expanded ? 'none' : 0,
@@ -108,9 +108,9 @@ var AccordionItem = function (_Component) {
     value: function handleExpand() {
       var _this2 = this;
 
-      var _props = this.props;
-      var onExpand = _props.onExpand;
-      var slug = _props.slug;
+      var _props = this.props,
+          onExpand = _props.onExpand,
+          slug = _props.slug;
 
 
       this.startTransition();
@@ -153,7 +153,7 @@ var AccordionItem = function (_Component) {
     value: function preloadImages(node) {
       var _this4 = this;
 
-      var images = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+      var images = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
       var imagesLoaded = 0;
       var imgLoaded = function imgLoaded() {
@@ -191,13 +191,14 @@ var AccordionItem = function (_Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        this.props.rootTag,
         _extends({}, this.getProps(), { ref: 'item' }),
         _react2.default.createElement(_AccordionItemTitle2.default, {
           className: this.props.titleClassName,
           title: this.props.title,
           onClick: this.props.disabled ? null : this.props.onClick,
           titleColor: this.props.titleColor,
+          rootTag: this.props.titleTag,
           uuid: this.uuid }),
         _react2.default.createElement(
           _AccordionItemBody2.default,
@@ -207,6 +208,7 @@ var AccordionItem = function (_Component) {
             className: this.props.bodyClassName,
             overflow: this.state.overflow,
             ref: 'body',
+            rootTag: this.props.bodyTag,
             uuid: this.uuid },
           this.props.children
         )
@@ -226,6 +228,12 @@ var AccordionItem = function (_Component) {
 exports.default = AccordionItem;
 
 
+AccordionItem.defaultProps = {
+  rootTag: 'div',
+  titleTag: 'h3',
+  bodyTag: 'div'
+};
+
 AccordionItem.propTypes = {
   bodyClassName: _react.PropTypes.string,
   className: _react.PropTypes.string,
@@ -237,5 +245,8 @@ AccordionItem.propTypes = {
   titleClassName: _react.PropTypes.string,
   disabled: _react.PropTypes.bool,
   disabledClassName: _react.PropTypes.string,
-  uuid: _react.PropTypes.string
+  uuid: _react.PropTypes.string,
+  rootTag: _react.PropTypes.string,
+  titleTag: _react.PropTypes.string,
+  bodyTag: _react.PropTypes.string
 };

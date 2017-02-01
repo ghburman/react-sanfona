@@ -43,7 +43,7 @@ var Accordion = function (_Component) {
   function Accordion(props) {
     _classCallCheck(this, Accordion);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Accordion).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Accordion.__proto__ || Object.getPrototypeOf(Accordion)).call(this, props));
 
     _this.updateActiveItems = _this.updateActiveItems.bind(_this);
     _this.updateActiveItems(props);
@@ -106,7 +106,9 @@ var Accordion = function (_Component) {
         return null;
       }
 
-      var children = arrayify(this.props.children);
+      var children = arrayify(this.props.children).filter(function (c) {
+        return c;
+      });
       return children.map(function (item, index) {
         var key = _this2.props.openNextAccordionItem ? index : item.props.slug || index;
         var expanded = _this2.state.activeItems.indexOf(key) !== -1 && !item.props.disabled;
@@ -123,7 +125,7 @@ var Accordion = function (_Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        this.props.rootTag,
         { className: (0, _classnames2.default)('react-sanfona', this.props.className),
           role: 'tablist',
           style: this.props.style },
@@ -140,7 +142,8 @@ exports.default = Accordion;
 
 Accordion.defaultProps = {
   activeItems: [0],
-  allowMultiple: false
+  allowMultiple: false,
+  rootTag: 'div'
 };
 
 Accordion.propTypes = {
@@ -148,5 +151,6 @@ Accordion.propTypes = {
   activeItems: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.array]),
   className: _react.PropTypes.string,
   onChange: _react.PropTypes.func,
+  rootTag: _react.PropTypes.string,
   style: _react.PropTypes.object
 };
