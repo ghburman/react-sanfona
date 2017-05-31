@@ -28,7 +28,7 @@ var AccordionItemBody = function (_Component) {
   function AccordionItemBody() {
     _classCallCheck(this, AccordionItemBody);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AccordionItemBody).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AccordionItemBody.__proto__ || Object.getPrototypeOf(AccordionItemBody)).apply(this, arguments));
   }
 
   _createClass(AccordionItemBody, [{
@@ -41,7 +41,7 @@ var AccordionItemBody = function (_Component) {
       };
 
       return _react2.default.createElement(
-        'div',
+        this.props.rootTag,
         { 'aria-labelledby': 'react-safona-item-title-' + this.props.uuid,
           className: (0, _classnames2.default)('react-sanfona-item-body', this.props.className),
           id: 'react-safona-item-body-' + this.props.uuid,
@@ -61,10 +61,15 @@ var AccordionItemBody = function (_Component) {
 exports.default = AccordionItemBody;
 
 
+AccordionItemBody.defaultProps = {
+  rootTag: 'div'
+};
+
 AccordionItemBody.propTypes = {
   className: _react.PropTypes.string,
   maxHeight: _react.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
   duration: _react.PropTypes.number,
   overflow: _react.PropTypes.string,
-  uuid: _react.PropTypes.string
+  uuid: _react.PropTypes.string,
+  rootTag: _react.PropTypes.string
 };

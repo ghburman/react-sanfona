@@ -13,17 +13,21 @@ export default class AccordionItemBody extends Component {
     };
 
     return (
-      <div aria-labelledby={`react-safona-item-title-${ this.props.uuid }`}
+      <this.props.rootTag aria-labelledby={`react-safona-item-title-${ this.props.uuid }`}
         className={className('react-sanfona-item-body', this.props.className)}
         id={`react-safona-item-body-${ this.props.uuid }`}
         style={style}>
         <div className="react-sanfona-item-body-wrapper">
           {this.props.children}
         </div>
-      </div>
+      </this.props.rootTag>
     );
   }
 
+}
+
+AccordionItemBody.defaultProps = {
+  rootTag: 'div'
 }
 
 AccordionItemBody.propTypes = {
@@ -34,5 +38,6 @@ AccordionItemBody.propTypes = {
   ]),
   duration: PropTypes.number,
   overflow: PropTypes.string,
-  uuid: PropTypes.string
+  uuid: PropTypes.string,
+  rootTag: PropTypes.string
 };
