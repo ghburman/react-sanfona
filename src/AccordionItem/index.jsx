@@ -124,12 +124,13 @@ export default class AccordionItem extends Component {
 
   render() {
     return (
-      <div {...this.getProps()} ref="item">
+      <this.props.rootTag {...this.getProps()} ref="item">
         <AccordionItemTitle
           className={this.props.titleClassName}
           title={this.props.title}
           onClick={this.props.disabled ? null : this.props.onClick}
           titleColor= {this.props.titleColor}
+          rootTag={this.props.titleTag}
           uuid={this.uuid} />
         <AccordionItemBody
           maxHeight={this.state.maxHeight}
@@ -137,14 +138,21 @@ export default class AccordionItem extends Component {
           className={this.props.bodyClassName}
           overflow={this.state.overflow}
           ref="body"
+          rootTag={this.props.bodyTag}
           uuid={this.uuid}>
           {this.props.children}
         </AccordionItemBody>
-      </div>
+      </this.props.rootTag>
     );
   }
 
 }
+
+AccordionItem.defaultProps = {
+  rootTag: 'div',
+  titleTag: 'h3',
+  bodyTag: 'div'
+};
 
 AccordionItem.propTypes = {
   bodyClassName: PropTypes.string,
@@ -160,5 +168,8 @@ AccordionItem.propTypes = {
   titleClassName: PropTypes.string,
   disabled: PropTypes.bool,
   disabledClassName: PropTypes.string,
-  uuid: PropTypes.string
+  uuid: PropTypes.string,
+  rootTag: PropTypes.string,
+  titleTag: PropTypes.string,
+  bodyTag: PropTypes.string
 };
